@@ -1,0 +1,208 @@
+public class TraverseTree{
+
+    public void preOrder(TreeNode root){
+
+        if(root == null) return ;
+        System.out.println(root.val);
+        preOrder(root.left);
+        preOrder(root.right);
+    }
+
+    public void inOrder(TreeNode root){
+        if(root == null) return ;
+        inOrder(root.left);
+        System.out.println(root.val);
+        inOrder(root.right);
+    }
+
+    public void postOrder(TreeNode root){
+        if(root == null) return ;
+        inOrder(root.left);
+        inOrder(root.right);
+        System.out.println(root.val);
+    }
+
+}
+
+public class Node{
+
+    String name;
+    int val;
+    Node left;
+    Node right;
+
+    public Node(String name, int val){
+        this.name = name;
+        this.val = val;
+    }
+}
+
+public int getNodesNumber(Node root){
+    
+    if(root == null) return 0;
+    int lnumber = getNodesNumber(root.left);
+    int rnumber = getNodesNumber(root.right);
+    return lnumber + rnumber + 1;
+}
+
+public int getDepth(Node root){
+    if(root == null) return 0;
+    int ldepth = getDepth(root.left);
+    int rdepth = getDepth(root.right);
+    return ldepth > rdepth ? ldepth + 1 : rdepth + 1;
+}
+
+public List<Integer> preOrder(Node root){
+
+    if(root == null) return null;
+    List<Integer> list = new ArrayList<Integer>();
+    Stack<Node> stack = new Stack<Node>();
+
+    stack.push(root);
+
+    while(!stack.isEmpty()){
+        Node point = stack.pop();
+        list.add(point.val);
+        if(point.right != null) stack.push(point.right);
+        if(point.left != null) stack.push(point.left);
+    }
+
+    return list;
+}
+
+public List<Integer> preOrder(Node root){
+    if(root == null) return null;
+    List<Integer> list = new ArrayList<Integer>();
+    Queue<Node> queue = new Queue<Node>();
+    queue.add(root);
+    while(!queue.peek() == null){
+        Node point = queue.poll();
+        list.add(point.val);
+        if(point.left != null) queue.add(point.left);
+        if(point.right != null) queue.add(point.right);
+    }
+    return list;
+}
+
+public List<Integer> preOrder(Node root){
+    List<integer> list = new ArrayList<Integer>();
+    if(root == null) return result;
+    getPreOrder(list,root);
+    return list;
+}
+
+public void getPreOrder(List<integer> result, Node root){
+    if(root == null) return ;
+    result.add(root.val);
+    getPreOrder(result,root.left);
+    getPreOrder(result,root.right);
+}
+
+public long fac(int n){
+    if(n == 1) return 1;
+    else return n * fac(n - 1);
+}
+
+class Node{
+    int val;
+    Node next;
+
+    public Node(int val){
+        this.val = val;
+    }
+}
+
+public Node getLinkedList(int[] nums){
+    Node newhead = null;
+    Node temp = null;
+    for(int i = 0; i < nums.length; i++){
+        newhead = new Node(nums[i]);
+        newhead.next = temp;
+        temp = newhead;
+    }
+    return newhead;
+}
+
+public class solution{
+
+    public List<Integer> getResult(TreeNode root, int level){
+        List<Integer> list = new ArrayList<Integer>();
+        if(root == null || level < 1) return list;
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+        int length = 1;
+        int queueSize = 1;
+        while(queueSize > 0){
+           for(int i = 0; i < queueSize; i++){
+               TreeNode node = queue.poll();
+               if(node.left != null) queue.add(node.left);
+               if(node.right != null) queue.add(node.right);
+           }
+           queueSize = queue.size();
+           length++;
+           if(length == level){
+               while(queue.size() > 0){
+                    list.add(queue.poll().val);
+               }
+               
+           }
+        }
+        return list;
+    }
+
+}
+
+class Node{
+    int val;
+    Node next;
+
+    public Node(int val){
+        this.val = val;
+    }
+        
+}
+
+public class solution{
+
+    public Node reverseList(Node head){
+        Node newhead = null;
+        while(head.next != null){
+            Node next = head.next;
+            head.next = newhead;
+            newhead = head;
+            head = next;
+        }
+        return newhead;
+    }
+}
+
+public class solution{
+
+    enum State{Unvisited,Visited, Visiting}
+    public boolean getRoute(Graph g, Node start, Node end){
+        if(start == end) return true;
+        Queue<Node> queue = new LinkedList<Node>();
+        
+        for(Node n : g.getNodes()){
+            u.state = State.Unvisited;
+        }
+        queue.add(start);
+        while(queue.size() > 0){
+            Node temp = queue.poll();
+            if(temp != null){
+                for(Node v : temp.getNodes()){
+                    if(v.state == State.Unvisited){
+                        if(v == end) return true;
+                    }
+                    else{
+                        v.state = State.Visiting;
+                        queue.add(v);
+                    }
+                }
+            }
+            temp.state = State.Visited;
+        }
+        return false;
+    }
+}
+
