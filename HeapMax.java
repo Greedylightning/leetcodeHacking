@@ -51,7 +51,7 @@ public class HeapMax{
 
     private void pushdown(int pos){
         int temp;
-        while(isleaf(pos)){
+        while(!isleaf(pos)){
             temp = leftchild(pos);
             if(temp <= size && heap[temp] < heap[temp + 1]) temp = temp + 1;
             if(heap[pos] > heap[temp]) return;
